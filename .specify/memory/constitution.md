@@ -1,50 +1,28 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Todo CLI 앱 헌법
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. 레이어 분리
+비즈니스 로직은 사용자 인터페이스와 분리된 독립 레이어에서 구현한다. CLI 입력/출력과 데이터 처리, 상태 관리는 서로 분리되어야 하며, UI 변경이 핵심 로직에 영향을 주지 않아야 한다.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. 테스트 우선
+테스트 코드가 구현 코드보다 먼저 작성된다. 테스트 없는 구현 코드는 허용하지 않으며, 모든 기능은 테스트로 검증된 상태에서 구현해야 한다.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. 최소 의존성
+외부 패키지 설치 전 반드시 필요성을 검토한다. 불필요한 의존성은 추가하지 않으며, 표준 라이브러리로 해결할 수 있는 문제는 외부 라이브러리에 의존하지 않는다.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. 단순함 우선
+지금 당장 필요하지 않은 추상화 레이어는 만들지 않는다. 명확하고 직접적인 구현을 선호하며, 과도한 설계는 피한다.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. CLI 도구 구현
+이 프로젝트는 터미널 기반 CLI 생산성 도구를 만든다. REST API 서버, GUI, 웹 인터페이스는 이 프로젝트 범위 밖이다.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Project Scope
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+이 프로젝트의 핵심 목적은 터미널에서 실행 가능한 Todo 관리 CLI 도구를 만드는 것이다. 사용자 경험은 명령줄 입력과 출력으로 제한되며, 네트워크 서버나 그래픽 인터페이스는 포함되지 않는다.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+이 헌법은 프로젝트의 중심 원칙을 정의한다. 모든 설계와 구현 결정은 이 헌법과 일치해야 하며, 예외가 필요한 경우 명확한 이유와 함께 문서화되어야 한다.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0 | **Ratified**: 2026-05-02 | **Last Amended**: 2026-05-02
