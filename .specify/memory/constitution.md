@@ -1,50 +1,65 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+Version change: template → 1.0.0
+Modified principles: added 5 project-specific principles
+Added sections: Scope & Constraints, Development Workflow
+Removed sections: none
+Templates checked: .specify/templates/plan-template.md ✅, .specify/templates/spec-template.md ✅, .specify/templates/tasks-template.md ✅
+Follow-up TODOs: none
+-->
+
+# Todo CLI Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### 1. 레이어 분리
+비즈니스 로직은 사용자 인터페이스와 분리된 독립 레이어에서 구현된다.
+- 입력 파싱, 출력 포맷, 터미널 상호작용은 CLI 계층에서만 처리된다.
+- 모든 도메인 규칙과 상태 변화는 UI에 의존하지 않는 서비스/도메인 레이어에 유지된다.
+- UI 변경이 생겨도 비즈니스 로직은 변경 없이 재사용 가능해야 한다.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### 2. 테스트 우선
+테스트 코드가 구현 코드보다 먼저 작성된다.
+- 새로운 기능과 버그 수정은 먼저 자동화된 테스트로 정의해야 한다.
+- 테스트 없는 구현 코드는 허용되지 않는다.
+- 모든 변경은 테스트로 검증된 후에 구현되고, 테스트는 실패한 상태에서 시작해야 한다.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### 3. 최소 의존성
+외부 패키지 설치 전 반드시 필요성을 검토한다.
+- 외부 라이브러리는 문제를 해결할 수 있는 가장 작은 범위에서만 도입한다.
+- 이미 언어 표준 라이브러리로 해결 가능한 기능은 외부 의존성 없이 구현한다.
+- 불필요한 의존성은 추가하지 않는다.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### 4. 단순함 우선
+지금 당장 필요하지 않은 추상화 레이어는 만들지 않는다.
+- 명확하고 직접적인 구현을 선호한다.
+- 과도한 일반화나 미래 확장성 위한 복잡도는 배제한다.
+- 설계는 현재 요구를 충족하면서도 변경을 최소화하도록 유지한다.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### 5. CLI 도구 구현
+이 프로젝트는 터미널 CLI 도구를 만든다.
+- 입출력은 명령어, 인수, 플래그, 표준 입력/출력 중심이다.
+- REST API 서버, GUI, 웹 인터페이스는 이 프로젝트 범위 밖이다.
+- 사용자 경험은 터미널 사용성과 명령형 흐름에 맞추어 설계한다.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Scope & Constraints
+이 프로젝트는 터미널 기반 Todo 관리 도구로 한정된다.
+- 백엔드 서버, 네트워크 API, 웹 브라우저 UI, 데스크톱 GUI는 제외한다.
+- 프로젝트 구현은 단일 CLI 애플리케이션으로 유지한다.
+- 외부 의존성은 최소화하고, CLI 사용자 경험 중심 설계를 우선한다.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+프로젝트는 테스트 우선, 레이어 분리, 의존성 검토를 기준으로 진행된다.
+- 모든 기능은 테스트부터 작성하고, 테스트가 실패할 때 구현을 시작한다.
+- CLI 계층과 비즈니스 계층을 분리하여 기능 검증과 유지보수를 용이하게 한다.
+- 새로운 패키지 도입은 문서화된 검토를 거쳐서만 허용한다.
+- 단순하고 직접적인 코드가 우선하며, 불필요한 추상화는 피한다.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+이 헌법은 프로젝트의 핵심 구현 원칙을 정의하며, 다른 개발 지침보다 우선한다.
+- 헌법 변경은 문서화되어야 하며, 변경 사유와 영향 범위를 명시해야 한다.
+- 새로운 원칙 추가 또는 기존 원칙 수정은 리뷰와 합의 후에 수행한다.
+- 구현팀은 PR 또는 코드 리뷰 단계에서 헌법 준수를 검증해야 한다.
+- 헌법은 프로젝트 범위와 개발 방식의 기준으로 사용된다.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-05-02 | **Last Amended**: 2026-05-02
