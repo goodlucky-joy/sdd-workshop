@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--
 Sync Impact Report
 Version change: template → 1.0.0
