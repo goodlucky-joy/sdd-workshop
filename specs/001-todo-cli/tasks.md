@@ -15,13 +15,13 @@
 
 **Purpose**: 프로젝트 초기화와 기본 구조를 만든다.
 
-- [ ] T001 Create `pyproject.toml` with Python 3.12, runtime dependencies (`typer`, `sqlalchemy`), and dev dependencies (`pytest`, `pytest-cov`)
+- [x] T001 Create `pyproject.toml` with Python 3.12, runtime dependencies (`typer`, `sqlalchemy`), and dev dependencies (`pytest`, `pytest-cov`)
 - [ ] T002 Create `uv.lock` by initializing the project with `uv` in the repository root
-- [ ] T003 Create `README.md` documenting CLI usage, installation, and commands
-- [ ] T004 Create package folder `todo_lib/` and file `todo_lib/__init__.py`
-- [ ] T005 Create package folder `cli/` and file `cli/__init__.py`
-- [ ] T006 Create test folder `tests/` and base file `tests/__init__.py`
-- [ ] T007 [P] Create CLI application skeleton in `cli/main.py` with `typer.Typer()` and command placeholders for `add`, `list`, `done`, `delete`
+- [x] T003 Create `README.md` documenting CLI usage, installation, and commands
+- [x] T004 Create package folder `todo_lib/` and file `todo_lib/__init__.py`
+- [x] T005 Create package folder `cli/` and file `cli/__init__.py`
+- [x] T006 Create test folder `tests/` and base file `tests/__init__.py`
+- [x] T007 [P] Create CLI application skeleton in `cli/main.py` with `typer.Typer()` and command placeholders for `add`, `list`, `done`, `delete`
 
 ---
 
@@ -31,18 +31,18 @@
 
 ### Foundational Test Infrastructure
 
-- [ ] T008 [P] Create `tests/conftest.py` with pytest fixtures for isolated SQLite test database, session factory, and cleanup hooks
+- [x] T008 [P] Create `tests/conftest.py` with pytest fixtures for isolated SQLite test database, session factory, and cleanup hooks
 
 ### Foundational Model & Data Layer (Green Phase)
 
-- [ ] T009 Create `todo_lib/models.py` and define `Todo` ORM model with `id`, `title`, `due_date`, `priority`, `done`, `created_at`
-- [ ] T010 Create `todo_lib/db.py` and implement SQLite engine creation, session management, and `create_tables()` helper
+- [x] T009 Create `todo_lib/models.py` and define `Todo` ORM model with `id`, `title`, `due_date`, `priority`, `done`, `created_at`
+- [x] T010 Create `todo_lib/db.py` and implement SQLite engine creation, session management, and `create_tables()` helper
 
 ### Foundational Operations (Red → Green → Refactor)
 
-- [ ] T011 [P] Create `tests/test_operations.py` with unit tests for stubs: `add_todo()`, `list_todos()`, `mark_todo_done()`, `delete_todo()` (all should fail initially)
-- [ ] T012 Create `todo_lib/operations.py` and implement operation stubs to pass foundational unit tests in `tests/test_operations.py`
-- [ ] T013 [P] Create `cli/main.py` command wiring with stubs that call `todo_lib.operations` for each command
+- [x] T011 [P] Create `tests/test_operations.py` with unit tests for stubs: `add_todo()`, `list_todos()`, `mark_todo_done()`, `delete_todo()` (all should fail initially)
+- [x] T012 Create `todo_lib/operations.py` and implement operation stubs to pass foundational unit tests in `tests/test_operations.py`
+- [x] T013 [P] Create `cli/main.py` command wiring with stubs that call `todo_lib.operations` for each command
 
 ---
 
@@ -57,7 +57,7 @@
 
 ### US1 - Red Phase: Unit Tests
 
-- [ ] T014 [P] [US1] Create `tests/test_add_unit.py` with failing pytest cases for:
+- [x] T014 [P] [US1] Create `tests/test_add_unit.py` with failing pytest cases for:
   - Valid `add_todo(title, due_date, priority)` with correct storage
   - Title validation (required, non-empty)
   - Due date parsing validation (`YYYY-MM-DD` format)
@@ -66,18 +66,18 @@
 
 ### US1 - Green Phase: Implementation
 
-- [ ] T015 [US1] Implement `add_todo()` in `todo_lib/operations.py` with title validation, optional `due_date` parsing on `YYYY-MM-DD`, and `priority` enum handling
-- [ ] T016 [US1] Implement database insert logic and verify all unit tests in `tests/test_add_unit.py` pass
+- [x] T015 [US1] Implement `add_todo()` in `todo_lib/operations.py` with title validation, optional `due_date` parsing on `YYYY-MM-DD`, and `priority` enum handling
+- [x] T016 [US1] Implement database insert logic and verify all unit tests in `tests/test_add_unit.py` pass
 
 ### US1 - Refactor Phase
 
-- [ ] T017 [P] [US1] Refactor `add_todo()` for error handling clarity, add docstring, verify test coverage ≥ 90%
+- [x] T017 [P] [US1] Refactor `add_todo()` for error handling clarity, add docstring, verify test coverage ≥ 90%
 
 ### US1 - Integration Phase: CLI Layer
 
-- [ ] T018 [US1] Implement `todo add` command in `cli/main.py` to parse `--due` and `--priority` flags and call `todo_lib.operations.add_todo()`
-- [ ] T019 [P] [US1] Create `tests/test_add_integration.py` with CLI integration tests for `todo add` command output and error messages
-- [ ] T020 [US1] Update `README.md` with `todo add` usage examples and validation rules
+- [x] T018 [US1] Implement `todo add` command in `cli/main.py` to parse `--due` and `--priority` flags and call `todo_lib.operations.add_todo()`
+- [x] T019 [P] [US1] Create `tests/test_add_integration.py` with CLI integration tests for `todo add` command output and error messages
+- [x] T020 [US1] Update `README.md` with `todo add` usage examples and validation rules
 
 ---
 
@@ -93,7 +93,7 @@
 
 ### US2 - Red Phase: Unit Tests
 
-- [ ] T021 [P] [US2] Create `tests/test_list_unit.py` with failing pytest cases for:
+- [x] T021 [P] [US2] Create `tests/test_list_unit.py` with failing pytest cases for:
   - `list_todos()` returns all items (empty, single, multiple)
   - Filtering by `done` status (done=True, done=False)
   - Filtering by priority (`High`, `Medium`, `Low`)
@@ -101,18 +101,18 @@
 
 ### US2 - Green Phase: Implementation
 
-- [ ] T022 [US2] Implement `list_todos(filters)` in `todo_lib/operations.py` with status and priority filtering
-- [ ] T023 [US2] Implement SQLite query logic and verify all unit tests in `tests/test_list_unit.py` pass
+- [x] T022 [US2] Implement `list_todos(filters)` in `todo_lib/operations.py` with status and priority filtering
+- [x] T023 [US2] Implement SQLite query logic and verify all unit tests in `tests/test_list_unit.py` pass
 
 ### US2 - Refactor Phase
 
-- [ ] T024 [P] [US2] Refactor `list_todos()` for query efficiency, add docstring, verify test coverage ≥ 90%
+- [x] T024 [P] [US2] Refactor `list_todos()` for query efficiency, add docstring, verify test coverage ≥ 90%
 
 ### US2 - Integration Phase: CLI Layer
 
-- [ ] T025 [US2] Implement `todo list` command in `cli/main.py` with `--filter` and `--priority` options
-- [ ] T026 [P] [US2] Create `tests/test_list_integration.py` with CLI integration tests for list command output formats
-- [ ] T027 [US2] Update `README.md` with `todo list` command examples and filter usage
+- [x] T025 [US2] Implement `todo list` command in `cli/main.py` with `--filter` and `--priority` options
+- [x] T026 [P] [US2] Create `tests/test_list_integration.py` with CLI integration tests for list command output formats
+- [x] T027 [US2] Update `README.md` with `todo list` command examples and filter usage
 
 ---
 
@@ -127,25 +127,25 @@
 
 ### US3 - Red Phase: Unit Tests
 
-- [ ] T028 [P] [US3] Create `tests/test_done_unit.py` with failing pytest cases for:
+- [x] T028 [P] [US3] Create `tests/test_done_unit.py` with failing pytest cases for:
   - `mark_todo_done(id)` successfully marks item as done
   - Invalid ID raises appropriate exception
   - Idempotent: marking already-done item again succeeds
 
 ### US3 - Green Phase: Implementation
 
-- [ ] T029 [US3] Implement `mark_todo_done()` in `todo_lib/operations.py` with ID validation and status update
-- [ ] T030 [US3] Implement database update logic and verify all unit tests in `tests/test_done_unit.py` pass
+- [x] T029 [US3] Implement `mark_todo_done()` in `todo_lib/operations.py` with ID validation and status update
+- [x] T030 [US3] Implement database update logic and verify all unit tests in `tests/test_done_unit.py` pass
 
 ### US3 - Refactor Phase
 
-- [ ] T031 [P] [US3] Refactor `mark_todo_done()` for error handling, add docstring, verify test coverage ≥ 90%
+- [x] T031 [P] [US3] Refactor `mark_todo_done()` for error handling, add docstring, verify test coverage ≥ 90%
 
 ### US3 - Integration Phase: CLI Layer
 
-- [ ] T032 [US3] Implement `todo done` command in `cli/main.py` to call `mark_todo_done()` and display success/error messages
-- [ ] T033 [P] [US3] Create `tests/test_done_integration.py` with CLI integration tests
-- [ ] T034 [US3] Update `README.md` with `todo done` command usage and expected output
+- [x] T032 [US3] Implement `todo done` command in `cli/main.py` to call `mark_todo_done()` and display success/error messages
+- [x] T033 [P] [US3] Create `tests/test_done_integration.py` with CLI integration tests
+- [x] T034 [US3] Update `README.md` with `todo done` command usage and expected output
 
 ---
 
@@ -160,25 +160,25 @@
 
 ### US4 - Red Phase: Unit Tests
 
-- [ ] T035 [P] [US4] Create `tests/test_delete_unit.py` with failing pytest cases for:
+- [x] T035 [P] [US4] Create `tests/test_delete_unit.py` with failing pytest cases for:
   - `delete_todo(id)` successfully deletes item
   - Invalid ID raises appropriate exception
   - Item no longer appears in subsequent queries
 
 ### US4 - Green Phase: Implementation
 
-- [ ] T036 [US4] Implement `delete_todo()` in `todo_lib/operations.py` with ID validation and deletion logic
-- [ ] T037 [US4] Implement database delete query and verify all unit tests in `tests/test_delete_unit.py` pass
+- [x] T036 [US4] Implement `delete_todo()` in `todo_lib/operations.py` with ID validation and deletion logic
+- [x] T037 [US4] Implement database delete query and verify all unit tests in `tests/test_delete_unit.py` pass
 
 ### US4 - Refactor Phase
 
-- [ ] T038 [P] [US4] Refactor `delete_todo()` for error handling, add docstring, verify test coverage ≥ 90%
+- [x] T038 [P] [US4] Refactor `delete_todo()` for error handling, add docstring, verify test coverage ≥ 90%
 
 ### US4 - Integration Phase: CLI Layer
 
-- [ ] T039 [US4] Implement `todo delete` command in `cli/main.py` to call `delete_todo()` and display success/error messages
-- [ ] T040 [P] [US4] Create `tests/test_delete_integration.py` with CLI integration tests
-- [ ] T041 [US4] Update `README.md` with `todo delete` command usage and expected output
+- [x] T039 [US4] Implement `todo delete` command in `cli/main.py` to call `delete_todo()` and display success/error messages
+- [x] T040 [P] [US4] Create `tests/test_delete_integration.py` with CLI integration tests
+- [x] T041 [US4] Update `README.md` with `todo delete` command usage and expected output
 
 ---
 
@@ -188,20 +188,20 @@
 
 ### Test Coverage & Quality
 
-- [ ] T042 [P] Run `pytest` with `pytest-cov` for all tests and achieve ≥ 80% overall coverage
-- [ ] T043 [P] Create `tests/test_e2e.py` with end-to-end scenario tests: add → list → done → delete workflow
-- [ ] T044 [P] [US1] Create tests for invalid due date format handling in `tests/test_add_unit.py`
-- [ ] T045 [P] Verify local persistence across restart: confirm `todo.db` is created and data persists after CLI exit
+- [x] T042 [P] Run `pytest` with `pytest-cov` for all tests and achieve ≥ 80% overall coverage
+- [x] T043 [P] Create `tests/test_e2e.py` with end-to-end scenario tests: add → list → done → delete workflow
+- [x] T044 [P] [US1] Create tests for invalid due date format handling in `tests/test_add_unit.py`
+- [x] T045 [P] Verify local persistence across restart: confirm `todo.db` is created and data persists after CLI exit
 
 ### Integration & Performance
 
-- [ ] T046 [P] Add performance validation: measure response time for `add`, `list`, `done`, `delete` commands (target: < 500ms per command)
-- [ ] T047 [P] Verify `todo_lib/db.py` creates `todo.db` in the local working directory and does not require a server
+- [x] T046 [P] Add performance validation: measure response time for `add`, `list`, `done`, `delete` commands (target: < 500ms per command)
+- [x] T047 [P] Verify `todo_lib/db.py` creates `todo.db` in the local working directory and does not require a server
 
 ### Documentation & Final Validation
 
-- [ ] T048 [P] Ensure `README.md` describes installation, command usage, all validation rules, and filter examples clearly
-- [ ] T049 [P] Verify all PRs satisfy code review gates: test-first structure, ≥ 80% coverage, TDD compliance
+- [x] T048 [P] Ensure `README.md` describes installation, command usage, all validation rules, and filter examples clearly
+- [x] T049 [P] Verify all PRs satisfy code review gates: test-first structure, ≥ 80% coverage, TDD compliance
 
 ---
 
