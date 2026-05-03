@@ -1,6 +1,6 @@
 # Feature Specification: Todo CLI 기본 기능
 
-**Feature Branch**: `todo-cli`
+**Feature Branch**: `001-cli-todo-app`
 **Created**: 2026-05-02
 **Status**: Draft
 **Input**: User description: "CLI 기반의 Todo 관리 앱을 만들고 싶어요. 사용자: 터미널을 사용하는 개인 개발자 주요기능: 1. Todo 항목 추가 : 제목(필수), 마감일(선택), 우선순위(선택) 2. 전체 목록 조회: 완료/미완료/우선순위로 필터링 가능 3. 항목 완료 처리 : 항목 ID로 완료 표시 4. 항목 삭제 : 항목 ID로 삭제 기술 스펙은 아직 미정"

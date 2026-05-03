@@ -15,7 +15,7 @@
 **Testing**: pytest, pytest-cov
 **Target Platform**: 터미널 실행 환경, 로컬 데스크톱/노트북
 **Project Type**: CLI 도구
-**Performance Goals**: 로컬 커맨드 응답 시간 200ms 이하, 단일 명령 실행 시 사용자 체감 지연 최소화
+**Performance Goals**: 로컬 커맨드 응답 시간 < 500ms (개발팀 목표), 명시 요구사항 < 1초 (spec SC-006 준수)
 **Constraints**: REST API/GUI 없음, 추가 외부 패키지 불허, 추상 인터페이스 사용 금지, 단순 함수/클래스 중심 구현
 **Scale/Scope**: 개인 개발자가 사용할 단일 사용자 로컬 Todo 관리, 수백 개 항목까지 지원
 
