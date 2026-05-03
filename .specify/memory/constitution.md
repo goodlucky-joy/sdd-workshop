@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-<!--
-Sync Impact Report
-Version change: template → 1.0.0
-Modified principles: added 5 project-specific principles
-Added sections: Scope & Constraints, Development Workflow
-Removed sections: none
-Templates checked: .specify/templates/plan-template.md ✅, .specify/templates/spec-template.md ✅, .specify/templates/tasks-template.md ✅
-Follow-up TODOs: none
--->
-
 # Todo CLI Constitution
 
 ## Core Principles
@@ -19,11 +8,14 @@ Follow-up TODOs: none
 - 모든 도메인 규칙과 상태 변화는 UI에 의존하지 않는 서비스/도메인 레이어에 유지된다.
 - UI 변경이 생겨도 비즈니스 로직은 변경 없이 재사용 가능해야 한다.
 
-### 2. 테스트 우선
-테스트 코드가 구현 코드보다 먼저 작성된다.
-- 새로운 기능과 버그 수정은 먼저 자동화된 테스트로 정의해야 한다.
-- 테스트 없는 구현 코드는 허용되지 않는다.
-- 모든 변경은 테스트로 검증된 후에 구현되고, 테스트는 실패한 상태에서 시작해야 한다.
+### 2. 테스트 우선 (RED-GREEN-REFACTOR 사이클) ⚙️ **NON-NEGOTIABLE**
+테스트 코드가 구현 코드보다 먼저 작성되고, 모든 기능은 테스트 통과로 검증된다.
+- **Red**: 실패하는 테스트를 먼저 작성한다. 구현 없이는 반드시 실패해야 한다.
+- **Green**: 테스트를 통과하는 최소한의 구현만 작성한다.
+- **Refactor**: 코드 품질을 개선하되, 테스트는 계속 통과해야 한다.
+- 새로운 기능과 버그 수정은 반드시 테스트로 정의된 후에 구현한다.
+- 테스트 없는 구현 코드는 PR 승인 단계에서 거부된다.
+- 각 사용자 스토리마다 독립적인 테스트 파일을 작성하고, 통합 테스트로 레이어 간 상호작용을 검증한다.
 
 ### 3. 최소 의존성
 외부 패키지 설치 전 반드시 필요성을 검토한다.
@@ -51,10 +43,18 @@ Follow-up TODOs: none
 
 ## Development Workflow
 프로젝트는 테스트 우선, 레이어 분리, 의존성 검토를 기준으로 진행된다.
-- 모든 기능은 테스트부터 작성하고, 테스트가 실패할 때 구현을 시작한다.
+- **모든 기능은 테스트부터 작성한다**: 구현 전에 실패하는 테스트 케이스가 존재해야 한다.
+- **테스트 작성 순서**: 단위 테스트(도메인/서비스) → 통합 테스트(CLI 명령) → 엔드-투-엔드 테스트(사용자 시나리오)
 - CLI 계층과 비즈니스 계층을 분리하여 기능 검증과 유지보수를 용이하게 한다.
 - 새로운 패키지 도입은 문서화된 검토를 거쳐서만 허용한다.
 - 단순하고 직접적인 코드가 우선하며, 불필요한 추상화는 피한다.
+
+## Code Review & Quality Gates
+모든 PR은 다음 항목을 만족해야 승인된다:
+- 테스트 커버리지 최소 80% 이상 (pytest-cov로 검증)
+- 모든 사용자 스토리 관련 테스트 통과
+- 테스트가 선행되고 구현이 그 뒤를 따르는 TDD 구조 확인
+- 헌법의 5가지 원칙 준수 여부 검증
 
 ## Governance
 이 헌법은 프로젝트의 핵심 구현 원칙을 정의하며, 다른 개발 지침보다 우선한다.
@@ -63,4 +63,4 @@ Follow-up TODOs: none
 - 구현팀은 PR 또는 코드 리뷰 단계에서 헌법 준수를 검증해야 한다.
 - 헌법은 프로젝트 범위와 개발 방식의 기준으로 사용된다.
 
-**Version**: 1.0.0 | **Ratified**: 2026-05-02 | **Last Amended**: 2026-05-02
+**Version**: 1.0.1 | **Ratified**: 2026-05-02 | **Last Amended**: 2026-05-03
