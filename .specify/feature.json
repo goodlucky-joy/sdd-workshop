@@ -1,3 +1,4 @@
 {
-  "feature_directory": "c:/sdd_workshop/sdd-workshop/specs/001-todo-cli"
+  "feature_directory": "specs\\002-todo-tags",
+  "implementation_plan": "specs/002-todo-tags/plan.md"
 }
