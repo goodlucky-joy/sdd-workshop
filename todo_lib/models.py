@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime
 from enum import Enum
 
-from sqlalchemy import Boolean, Date, DateTime, Enum as SqlEnum, Integer, String
+from sqlalchemy import Boolean, Date, DateTime, Enum as SqlEnum, Integer, JSON, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -28,3 +28,4 @@ class Todo(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, default=datetime.utcnow
     )
+    tags: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)

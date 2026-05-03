@@ -28,10 +28,75 @@ def parse_priority(value: str | None) -> Priority | None:
         raise ValueError("Priority must be High, Medium, or Low") from exc
 
 
+
+
+
+def validate_tags(tags: list[str] | None) -> list[str]:
+    """
+    Validate and normalize tags.
+    - Tags must be non-empty list or None
+    - Each tag must be a non-empty string
+    - Maximum 10 tags per todo
+    - Each tag max 50 characters
+    """
+    if tags is None:
+        return []
+    
+    if not isinstance(tags, list):
+        raise ValueError("Tags must be a list")
+    
+    if len(tags) > 10:
+        raise ValueError("Maximum 10 tags allowed per todo")
+    
+    validated = []
+    for tag in tags:
+        if not isinstance(tag, str):
+            raise ValueError("Each tag must be a string")
+        
+        tag = tag.strip()
+        if not tag:
+            raise ValueError("Tags cannot be empty")
+        
+        if len(tag) > 50:
+            raise ValueError("Each tag must be 50 characters or less")
+        
+        validated.append(tag)
+    
+    return validated
+
+
+def normalize_tags(tags: list[str] | None) -> list[str]:
+    """
+    Normalize tags: trim, deduplicate, case-insensitive sorting.
+    """
+    if not tags:
+        return []
+    
+    # Trim each tag
+    trimmed = [tag.strip() for tag in tags]
+    
+    # Remove empty strings
+    trimmed = [tag for tag in trimmed if tag]
+    
+    # Deduplicate (case-insensitive)
+    seen = set()
+    deduplicated = []
+    for tag in trimmed:
+        tag_lower = tag.lower()
+        if tag_lower not in seen:
+            seen.add(tag_lower)
+            deduplicated.append(tag)
+    
+    # Sort for consistency
+    deduplicated.sort(key=str.lower)
+    
+    return deduplicated
+
 def add_todo(
     title: str,
     due_date: str | None = None,
     priority: str | None = None,
+    tags: list[str] | None = None,
     session: Session | None = None,
 ) -> Todo:
     if not title or not title.strip():
@@ -39,6 +104,8 @@ def add_todo(
 
     due = parse_due_date(due_date)
     priority_enum = parse_priority(priority)
+    validated_tags = validate_tags(tags)
+    normalized_tags = normalize_tags(validated_tags)
 
     own_session = False
     if session is None:
@@ -46,7 +113,12 @@ def add_todo(
         own_session = True
 
     try:
-        todo = Todo(title=title.strip(), due_date=due, priority=priority_enum)
+        todo = Todo(
+            title=title.strip(),
+            due_date=due,
+            priority=priority_enum,
+            tags=normalized_tags
+        )
         session.add(todo)
         session.commit()
         session.refresh(todo)
@@ -59,6 +131,7 @@ def add_todo(
 def list_todos(
     done: str | None = None,
     priority: str | None = None,
+    tag: str | None = None,
     session: Session | None = None,
 ) -> list[Todo]:
     own_session = False
@@ -82,7 +155,17 @@ def list_todos(
             priority_enum = parse_priority(priority)
             query = query.where(Todo.priority == priority_enum)
 
-        return session.execute(query).scalars().all()
+        results = session.execute(query).scalars().all()
+        
+        # Filter by tag if provided (case-insensitive)
+        if tag is not None and tag.strip() != "":
+            tag_lower = tag.strip().lower()
+            results = [
+                todo for todo in results
+                if any(t.lower() == tag_lower for t in todo.tags)
+            ]
+        
+        return results
     finally:
         if own_session:
             session.close()
